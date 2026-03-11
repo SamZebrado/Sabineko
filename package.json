@@ -1,0 +1,25 @@
+{
+  "name": "sabineko",
+  "version": "0.3.0",
+  "private": false,
+  "type": "commonjs",
+  "scripts": {
+    "init:paper": "node scripts/init_paper.js",
+    "capture": "node scripts/capture_deepsea_state.js",
+    "validate:paper": "node scripts/validate_paper_config.js",
+    "build:northno1": "node scripts/build_northno1_message.js",
+    "build:deepsea-bundle": "node scripts/build_deepsea_bundle.js",
+    "push:deepsea": "node scripts/push_bundle_to_deepsea.js",
+    "deepsea:auto": "node scripts/deepsea_automation.js",
+    "northno1:auto": "node scripts/northno1_automation.js",
+    "open:dedicated-profile": "bash scripts/open_dedicated_profile.sh",
+    "parse:reply": "node scripts/parse_northno1_reply.js",
+    "smoke:test": "node scripts/smoke_test.js",
+    "run:capture": "bash run_capture.sh",
+    "web": "node scripts/web_console_server.js",
+    "run:web": "bash run_web.sh"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  }
+}

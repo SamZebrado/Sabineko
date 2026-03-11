@@ -1,0 +1,48 @@
+node_modules/
+
+# Global/local auth state
+state/global/storage_state.json
+state/**/storage_state.json
+state/chrome_profiles/**
+state/web_server.log
+state/northno1_send_guard.json
+
+# Per-paper state (keep only skeleton)
+papers/*/state/**
+!papers/*/state/.gitkeep
+
+# Per-paper captures are sensitive (HTML/PDF/screenshot/network/dom dumps)
+papers/*/captures/**
+!papers/*/captures/.gitkeep
+!papers/*/captures/history/.gitkeep
+!papers/*/captures/latest/.gitkeep
+
+# Per-paper downloads/handoffs may contain private manuscript contents
+papers/*/downloads/**
+!papers/*/downloads/.gitkeep
+papers/*/handoff/**
+!papers/*/handoff/.gitkeep
+
+# Prompt artifacts that may contain private context
+papers/*/prompts/objective.md
+papers/*/prompts/northno1_reply.txt
+papers/*/prompts/to_northno1.md
+papers/*/prompts/for_codex.md
+papers/*/prompts/for_deepsea.md
+papers/*/prompts/deepsea_reply.txt
+papers/*/prompts/note_for_user.md
+papers/*/prompts/request_for_pipeline.md
+papers/*/prompts/request_for_pipeline.json
+papers/*/prompts/pipeline_api_requests.json
+papers/*/prompts/to_northno1_after_deepsea.md
+papers/*/prompts/to_northno1_post_test.md
+papers/*/prompts/parse_result.json
+
+# Potentially sensitive logs
+*.log
+Testing_log_*.md
+.DS_Store
+**/.DS_Store
+
+# Generated private sharing bundles
+share/**
