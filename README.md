@@ -1,5 +1,37 @@
 # sabineko
 
+## 使用例子 / Example Workflow
+
+### 中文
+一个典型用法是：
+1. 从 `DeepSea` 获取某篇论文初稿相关的 LaTeX、PDF 和必要附件。
+2. 把这些材料交给 `NorthNo1` 审核。
+3. `NorthNo1` 分别给 `Codex` 和 `DeepSea` 生成 prompt。
+4. `Codex` 执行自己的 prompt，并把结果交给 `DeepSea`，由 `DeepSea` 更新 paper。
+5. 如果需要，可以加入一个额外循环：`NorthNo1` 核对 -> `Codex` 修改 -> `NorthNo1` 批准。
+6. `DeepSea` 按 prompt 应用修改后，进入下一轮。
+
+补充说明：
+- 每轮循环开始前，人类可以先审查当前状态并提供初始意见。
+- 流程中途可以随时暂停。
+- 也可以只使用 pipeline 的某个部分，而不是整套流程。
+- 如果需要，还可以把其中一个部分单独提纯成独立 skill。
+
+### English
+A typical workflow looks like this:
+1. Pull draft-related LaTeX, PDF, and needed attachments from `DeepSea`.
+2. Send those materials to `NorthNo1` for review.
+3. Let `NorthNo1` generate separate prompts for `Codex` and `DeepSea`.
+4. `Codex` executes its prompt and passes the result back to `DeepSea`, which updates the paper.
+5. If needed, add an extra loop: `NorthNo1` checks -> `Codex` revises -> `NorthNo1` approves.
+6. After `DeepSea` applies the requested edits, the workflow can move into the next round.
+
+Additional notes:
+- A human can review the current state and provide initial comments at the start of each round.
+- The workflow can be paused at any time.
+- You can also use only one part of the pipeline instead of the whole loop.
+- Any individual part can be extracted further into a standalone skill if needed.
+
 ## 中文
 
 ### 简介
