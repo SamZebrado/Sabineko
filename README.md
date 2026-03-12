@@ -1,37 +1,5 @@
 # sabineko
 
-## 使用例子 / Example Workflow
-
-### 中文
-一个典型用法是：
-1. 从 `DeepSea` 获取某篇论文初稿相关的 LaTeX、PDF 和必要附件。
-2. 把这些材料交给 `NorthNo1` 审核。
-3. `NorthNo1` 分别给 `Codex` 和 `DeepSea` 生成 prompt。
-4. `Codex` 执行自己的 prompt，并把结果交给 `DeepSea`，由 `DeepSea` 更新 paper。
-5. 如果需要，可以加入一个额外循环：`NorthNo1` 核对 -> `Codex` 修改 -> `NorthNo1` 批准。
-6. `DeepSea` 按 prompt 应用修改后，进入下一轮。
-
-补充说明：
-- 每轮循环开始前，人类可以先审查当前状态并提供初始意见。
-- 流程中途可以随时暂停。
-- 也可以只使用 pipeline 的某个部分，而不是整套流程。
-- 如果需要，还可以把其中一个部分单独提纯成独立 skill。
-
-### English
-A typical workflow looks like this:
-1. Pull draft-related LaTeX, PDF, and needed attachments from `DeepSea`.
-2. Send those materials to `NorthNo1` for review.
-3. Let `NorthNo1` generate separate prompts for `Codex` and `DeepSea`.
-4. `Codex` executes its prompt and passes the result back to `DeepSea`, which updates the paper.
-5. If needed, add an extra loop: `NorthNo1` checks -> `Codex` revises -> `NorthNo1` approves.
-6. After `DeepSea` applies the requested edits, the workflow can move into the next round.
-
-Additional notes:
-- A human can review the current state and provide initial comments at the start of each round.
-- The workflow can be paused at any time.
-- You can also use only one part of the pipeline instead of the whole loop.
-- Any individual part can be extracted further into a standalone skill if needed.
-
 ## 中文
 
 ### 简介
@@ -42,17 +10,32 @@ Additional notes:
 
 项目把每篇论文的数据隔离在 `papers/<paper_id>/` 下，并通过本地 JSON API 暴露统一接口，让其它目录中的 agent 不需要直接依赖文件路径。
 
+### 使用例子
+一个典型用法是：
+1. 从 `DeepSea` 获取某篇论文初稿相关的 LaTeX、PDF 和必要附件。
+2. 把这些材料交给 `NorthNo1` 审核。
+3. `NorthNo1` 分别给 `Codex` 和 `DeepSea` 生成 prompt。
+4. `Codex` 执行自己的 prompt，并把结果交给 `DeepSea`，由 `DeepSea` 更新 paper。
+5. 如果需要，可以加入额外循环：`NorthNo1` 核对 -> `Codex` 修改 -> `NorthNo1` 批准。
+6. `DeepSea` 按 prompt 应用修改后，进入下一轮。
+
+补充说明：
+- 每轮开始前，人类可以先审查当前状态并提供初始意见。
+- 流程中途可以随时暂停。
+- 也可以只使用 pipeline 的某个部分，而不是整套流程。
+- 如果需要，还可以把其中一个部分单独提纯成独立 skill。
+
 ### 作者说明
 这个项目是我和 `Codex` 一起写的。
 
-如果你愿意，完全可以继续使用 `Codex` 或其它 AI，把这个项目继续拆分、重写或者转化成更细的 `Skills`。
+如果你愿意，完全可以继续使用 `Codex` 或其它 AI，把这个项目继续拆分、重写，或者转化成更细的 `Skills`。
 
 我自己并不太会用 GitHub；这个仓库目前主要是为了分享。其它更复杂的交互、开源维护和社区化做法，我会以非常慢的速度学习。
 
 ### 项目范围
 这个仓库是一个可发布的、平台中性的核心版本。
 
-它刻意避免把某个特定聊天平台或特定文稿平台硬编码到项目对外描述中。如果你需要网页自动化，可以在你自己的部署里接入浏览器自动化插件，或者使用 Playwright 适配层；但在启用前，请先确认你的做法符合目标 AI 平台或目标服务平台的规则。
+它刻意避免把某个特定聊天平台或特定文稿平台硬编码到项目对外描述中。如果你需要网页自动化，可以在你自己的部署里接入浏览器自动化插件，或者使用 Playwright 适配层；但在启用前，请先确认你的做法符合目标平台或目标服务的规则。
 
 ### 依赖
 必需：
@@ -216,6 +199,21 @@ curl -s -X POST http://127.0.0.1:8788/api/papers/paper_default/actions/execute-r
 
 The project isolates each paper under `papers/<paper_id>/` and exposes a local JSON API so agents in other directories do not need direct filesystem coupling.
 
+### Example Workflow
+A typical workflow looks like this:
+1. Pull draft-related LaTeX, PDF, and needed attachments from `DeepSea`.
+2. Send those materials to `NorthNo1` for review.
+3. Let `NorthNo1` generate separate prompts for `Codex` and `DeepSea`.
+4. `Codex` executes its prompt and passes the result back to `DeepSea`, which updates the paper.
+5. If needed, add an extra loop: `NorthNo1` checks -> `Codex` revises -> `NorthNo1` approves.
+6. After `DeepSea` applies the requested edits, the workflow can move into the next round.
+
+Additional notes:
+- A human can review the current state and provide initial comments at the start of each round.
+- The workflow can be paused at any time.
+- You can also use only one part of the pipeline instead of the whole loop.
+- Any individual part can be extracted further into a standalone skill if needed.
+
 ### Author Note
 This project was written by me together with `Codex`.
 
@@ -226,7 +224,7 @@ I am not very experienced with GitHub. Right now I mainly use it as a sharing ch
 ### Scope
 This repository is the publishable, platform-neutral core.
 
-It intentionally avoids hard-coding any specific chat platform or manuscript platform into the public framing of the project. If you need web automation, you can add a browser automation plugin or a Playwright-based adapter in your own deployment, but you should verify that your approach complies with the rules of the target AI platform or service platform before enabling it.
+It intentionally avoids hard-coding any specific chat platform or manuscript platform into the public framing of the project. If you need web automation, you can add a browser automation plugin or a Playwright-based adapter in your own deployment, but you should verify that your approach complies with the rules of the target platform or service before enabling it.
 
 ### Dependencies
 Required:
