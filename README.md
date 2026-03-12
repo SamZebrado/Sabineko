@@ -188,6 +188,12 @@ curl -s -X POST http://127.0.0.1:8788/api/papers/paper_default/actions/execute-r
 - 如果你接入浏览器自动化层，请把它视为可选组件，并确认目标平台允许这样做。
 - 如果你需要审阅复杂文稿、做深度比较、生成高质量 prompt，请使用具备这类能力的高级 AI 系统，并通过合规的 API 或经允许的访问路径接入。
 
+### 免责声明
+- 本项目是一个通用框架示例，不针对任何特定商业 AI 平台或特定在线服务作出兼容性、授权性或合规性承诺。
+- 任何人如果将本项目接入某个具体 AI 提供方、网页平台、API 或文稿平台，需要自行确认该接入方式符合适用的法律、合同、平台条款和使用规则。
+- 仓库作者不对第三方用户基于本项目进行的具体部署、二次开发、自动化接入或平台使用行为提供法律保证，也不对其合规性作出背书。
+- 如果某个平台禁止某类自动化、数据抓取、消息收发或脚本化访问，使用者不应使用本项目去规避这些限制。
+
 ### 发布卫生
 不要提交：
 - 真实论文内容
@@ -354,6 +360,12 @@ curl -s -X POST http://127.0.0.1:8788/api/papers/paper_default/actions/execute-r
 - If you connect a third-party AI provider, you are responsible for using an access method that complies with that provider's rules.
 - If you add a browser automation layer, keep it optional and verify that it is permitted by the target platform.
 - If you need a system that can review complex manuscripts, compare alternatives, and generate strong prompts, use a sufficiently capable advanced AI system through a compliant API or another permitted access path.
+
+### Disclaimer
+- This project is a general framework example. It does not make any promise of compatibility, authorization, or compliance with any specific commercial AI platform or online service.
+- Anyone who connects this project to a concrete AI provider, web platform, API, or manuscript platform must independently confirm that the chosen integration method complies with applicable law, contracts, platform terms, and usage rules.
+- The repository author does not provide legal assurance for any third-party deployment, downstream modification, automation workflow, or platform-specific use built on top of this project, and does not endorse the compliance of such use.
+- If a platform prohibits a category of automation, extraction, messaging, or scripted access, users should not use this project to bypass those restrictions.
 
 ### Publishing Hygiene
 Do not commit:
