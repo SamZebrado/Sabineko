@@ -186,6 +186,7 @@ curl -s -X POST http://127.0.0.1:8788/api/papers/paper_default/actions/execute-r
 - 这个仓库采用的是中性接口和按论文隔离的数据组织方式。
 - 如果你接入第三方 AI 提供方，你需要自己确认所使用的 API 或访问方式符合对方规则。
 - 如果你接入浏览器自动化层，请把它视为可选组件，并确认目标平台允许这样做。
+- 有些网页平台明确禁止自动化访问、脚本化交互、批量抓取或非人工操作；对于这类平台，不应使用本项目的自动化能力。
 - 如果你需要审阅复杂文稿、做深度比较、生成高质量 prompt，请使用具备这类能力的高级 AI 系统，并通过合规的 API 或经允许的访问路径接入。
 
 ### 免责声明
@@ -359,6 +360,7 @@ curl -s -X POST http://127.0.0.1:8788/api/papers/paper_default/actions/execute-r
 - This repository is framed around neutral interfaces and paper-local data handling.
 - If you connect a third-party AI provider, you are responsible for using an access method that complies with that provider's rules.
 - If you add a browser automation layer, keep it optional and verify that it is permitted by the target platform.
+- Some web platforms explicitly prohibit automated access, scripted interaction, bulk extraction, or non-human operation; for those platforms, this project's automation features should not be used.
 - If you need a system that can review complex manuscripts, compare alternatives, and generate strong prompts, use a sufficiently capable advanced AI system through a compliant API or another permitted access path.
 
 ### Disclaimer
