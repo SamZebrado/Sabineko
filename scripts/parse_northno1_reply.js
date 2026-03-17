@@ -10,6 +10,7 @@ const {
   paperPaths,
   relToRoot
 } = require('./paper_paths');
+const qvbingMode = require('./qvbing_mode');
 
 const REQUIRED_BLOCK_KEYS = ['PROMPT_FOR_CODEX', 'PROMPT_FOR_DEEPSEA'];
 const OPTIONAL_BLOCK_KEYS = ['NOTE_FOR_USER', 'REQUEST_FOR_PIPELINE', 'PIPELINE_API_REQUESTS_JSON'];
@@ -236,6 +237,20 @@ function main() {
     for (const w of parseResult.warnings) {
       console.log(`  - ${w}`);
     }
+  }
+
+  // 趣味模式触发逻辑
+  if (parseResult.warnings.length > 0) {
+    // 发现问题时触发北方一号的台词
+    qvbingMode.checkAndEmit('北方一号', '发现bug');
+  }
+
+  if (!parseResult.ok) {
+    // 解析失败时触发行动队长的台词
+    qvbingMode.checkAndEmit('行动队长', '找不到问题');
+  } else {
+    // 解析成功时触发深海的台词
+    qvbingMode.checkAndEmit('深海', '确认文章已经改好了');
   }
 
   if (parseResult.ok) {

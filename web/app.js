@@ -204,10 +204,102 @@ function bindEvents() {
   });
 }
 
+async function refreshQvbingModeStatus() {
+  try {
+    const data = await api('/api/qvbing-mode/status');
+    const btn = el('toggleQvbingModeBtn');
+    if (btn) {
+      btn.textContent = `趣味模式：${data.enabled ? '开启' : '关闭'}`;
+      btn.style.backgroundColor = data.enabled ? '#4CAF50' : '#f44336';
+    }
+  } catch (err) {
+    console.error('Failed to refresh qvbing mode status:', err);
+  }
+}
+
+async function toggleQvbingMode() {
+  try {
+    const data = await api('/api/qvbing-mode/toggle', 'POST');
+    const btn = el('toggleQvbingModeBtn');
+    if (btn) {
+      btn.textContent = `趣味模式：${data.enabled ? '开启' : '关闭'}`;
+      btn.style.backgroundColor = data.enabled ? '#4CAF50' : '#f44336';
+    }
+  } catch (err) {
+    alert('切换趣味模式失败：' + err.message);
+  }
+}
+
+function bindEvents() {
+  el('refreshPapersBtn').addEventListener('click', async () => {
+    await refreshPapers();
+    await refreshContext();
+  });
+
+  el('paperSelect').addEventListener('change', async (e) => {
+    state.currentPaper = e.target.value;
+    await refreshPapers();
+    await refreshContext();
+  });
+
+  el('createPaperBtn').addEventListener('click', async () => {
+    try {
+      await createPaper();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  el('saveConfigBtn').addEventListener('click', async () => {
+    try {
+      await saveConfig();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  el('saveObjectiveBtn').addEventListener('click', async () => {
+    try {
+      await saveObjective();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  el('runCaptureBtn').addEventListener('click', async () => {
+    try {
+      await runCapture();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  el('saveReplyBtn').addEventListener('click', async () => {
+    try {
+      await saveReply();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  el('parseReplyBtn').addEventListener('click', async () => {
+    try {
+      await parseReply();
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  el('toggleQvbingModeBtn').addEventListener('click', async () => {
+    await toggleQvbingMode();
+  });
+}
+
 async function init() {
   bindEvents();
   await refreshPapers();
   await refreshContext();
+  await refreshQvbingModeStatus();
 
   if (state.pollingTimer) {
     clearInterval(state.pollingTimer);
@@ -217,6 +309,7 @@ async function init() {
     try {
       await refreshPapers();
       await refreshContext();
+      await refreshQvbingModeStatus();
     } catch (err) {
       // keep polling loop alive
     }

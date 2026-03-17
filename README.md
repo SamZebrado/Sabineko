@@ -138,6 +138,36 @@ node scripts/parse_northno1_reply.js --paper paper_default --input papers/paper_
 ./run_web.sh
 ```
 
+### 趣味模式（《潜伏》致敬）
+项目支持一个趣味模式，让北方一号、行动队长和深海三个角色说出《潜伏》中的经典台词。
+
+#### 开启/关闭趣味模式
+- 通过 Web 界面上的「趣味模式」按钮切换
+- 或通过 API 端点：
+  ```bash
+  # 查看状态
+  curl http://localhost:8788/api/qvbing-mode/status
+  
+  # 开启
+  curl -X POST http://localhost:8788/api/qvbing-mode/enable
+  
+  # 关闭
+  curl -X POST http://localhost:8788/api/qvbing-mode/disable
+  
+  # 切换
+  curl -X POST http://localhost:8788/api/qvbing-mode/toggle
+  ```
+
+#### 注意事项
+- 为了节省 token，平时不建议开启此模式
+- 台词会通过终端输出，不影响核心 pipeline 的运行
+- 每个角色的台词都有相应的触发条件，确保台词与场景匹配
+
+#### 角色与台词
+- **北方一号**：站长角色，会在发现问题时说出经典台词
+- **行动队长**：会在执行步骤中说出相应台词
+- **深海**：余则成和翠萍角色，会在完成任务时说出经典台词
+
 ### 本地 JSON API
 常见 action：
 - `northno1.compose`

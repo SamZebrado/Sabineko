@@ -21,6 +21,7 @@ const {
   consumeDeepSeaRun,
   terminatePipeline
 } = require('./pipeline_state');
+const qvbingMode = require('./qvbing_mode');
 
 const WEB_DIR = path.join(ROOT, 'web');
 const PORT = Number(process.env.PIPELINE_WEB_PORT || 8788);
@@ -1350,6 +1351,29 @@ function serveStatic(req, res, pathname) {
 async function handleApi(req, res, pathname, query) {
   if (req.method === 'GET' && pathname === '/api/northno1-send-guard') {
     sendJson(res, 200, readSendGuard());
+    return;
+  }
+
+  if (req.method === 'GET' && pathname === '/api/qvbing-mode/status') {
+    sendJson(res, 200, { enabled: qvbingMode.enabled });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/qvbing-mode/toggle') {
+    const enabled = qvbingMode.toggle();
+    sendJson(res, 200, { enabled });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/qvbing-mode/enable') {
+    qvbingMode.enable();
+    sendJson(res, 200, { enabled: true });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/qvbing-mode/disable') {
+    qvbingMode.disable();
+    sendJson(res, 200, { enabled: false });
     return;
   }
 
