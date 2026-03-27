@@ -1,0 +1,8 @@
+===  prompt_for_codex   ===
+请在 papers/<paper_id>/captures/latest 基础上整理一个可复核的执行清单，输出到 notes.md。
+
+===PROMPT_FOR_DEEPSEA===
+请根据 captures/latest/dom_summary.md 和 assets.json，优先检查 figure/table 区域并输出补充建议。
+
+=== note_for_user ===
+先确认 for_codex.md 和 for_deepsea.md 都已生成，再分别发给对应系统执行。

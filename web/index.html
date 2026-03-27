@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeepSea Capture Console</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>DeepSea Capture Console</h1>
+      <p>输入目标、触发抓取、查看工作流进度、粘贴并解析 NorthNo1 回复</p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>论文选择</h2>
+        <div class="row">
+          <select id="paperSelect"></select>
+          <button id="refreshPapersBtn">刷新列表</button>
+        </div>
+        <div class="row">
+          <input id="newPaperId" placeholder="新 paper_id，如 paper_c" />
+          <button id="createPaperBtn">新增论文</button>
+        </div>
+        <p class="hint" id="paperHint"></p>
+      </section>
+
+      <section class="card">
+        <h2>DeepSea 配置</h2>
+        <label>projectUrl</label>
+        <input id="projectUrl" placeholder="https://deepsea.example.com/..." />
+
+        <label>baseUrl</label>
+        <input id="baseUrl" placeholder="https://deepsea.example.com/" />
+
+        <label>loginSuccessSelector (可选)</label>
+        <input id="loginSelector" placeholder="例如: [data-test='avatar']" />
+
+        <label>stateMode</label>
+        <select id="stateMode">
+          <option value="global">global</option>
+          <option value="paper">paper</option>
+        </select>
+
+        <button id="saveConfigBtn">保存配置</button>
+      </section>
+
+      <section class="card span2">
+        <h2>任务目标 (objective)</h2>
+        <textarea id="objective" rows="4" placeholder="输入这轮希望达成的目标"></textarea>
+        <button id="saveObjectiveBtn">保存目标</button>
+      </section>
+
+      <section class="card">
+        <h2>执行</h2>
+        <div class="row">
+          <button id="runCaptureBtn">运行抓取流水线</button>
+          <label class="inline"><input type="checkbox" id="forceLogin" /> 强制重登</label>
+        </div>
+        <div class="row">
+          <button id="toggleQvbingModeBtn">趣味模式：关闭</button>
+        </div>
+        <div class="status" id="currentStep">当前步骤：-</div>
+        <ul id="progressList"></ul>
+      </section>
+
+      <section class="card">
+        <h2>日志</h2>
+        <pre id="logBox"></pre>
+      </section>
+
+      <section class="card span2">
+        <h2>给 NorthNo1 的消息</h2>
+        <textarea id="toChatgpt" rows="12" readonly></textarea>
+      </section>
+
+      <section class="card span2">
+        <h2>NorthNo1 回复</h2>
+        <textarea id="northno1Reply" rows="12" placeholder="把 NorthNo1 网页回复粘贴到这里"></textarea>
+        <div class="row">
+          <button id="saveReplyBtn">保存回复</button>
+          <button id="parseReplyBtn">解析为 Codex/DeepSea Prompt</button>
+        </div>
+      </section>
+
+      <section class="card span2">
+        <h2>解析结果</h2>
+        <label>for_codex.md</label>
+        <textarea id="forCodex" rows="6" readonly></textarea>
+        <label>for_deepsea.md</label>
+        <textarea id="forDeepSea" rows="6" readonly></textarea>
+        <label>note_for_user.md</label>
+        <textarea id="noteForUser" rows="4" readonly></textarea>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
