@@ -53,9 +53,6 @@ function sendText(res, statusCode, text, contentType = 'text/plain; charset=utf-
 }
 
 function readBody(req) {
-  if (!isJsonRequest(req)) {
-    return Promise.reject(Object.assign(new Error('API request bodies must use application/json'), { statusCode: 415 }));
-  }
   return new Promise((resolve, reject) => {
     let raw = '';
     req.on('data', (chunk) => {
@@ -65,6 +62,12 @@ function readBody(req) {
       }
     });
     req.on('end', () => {
+      // Bodyless default-parameter actions need no media type. Whitespace is
+      // still a present body and must pass JSON validation before defaulting.
+      if (raw.length > 0 && !isJsonRequest(req)) {
+        reject(Object.assign(new Error('API request bodies must use application/json'), { statusCode: 415 }));
+        return;
+      }
       if (!raw.trim()) {
         resolve({});
         return;
