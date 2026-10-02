@@ -113,6 +113,13 @@ run_web.sh
 ```
 
 ### 主要命令
+先创建论文工作区：
+```bash
+node scripts/init_paper.js --paper paper_default
+```
+
+编辑生成的 `papers/paper_default/config/deepsea.json`，将占位 URL 替换为你获准使用的工作区及 API 配置。不要提交真实配置或凭据。校验器会拒绝默认占位 URL。
+
 校验论文配置：
 ```bash
 node scripts/validate_paper_config.js --paper paper_default
@@ -169,6 +176,10 @@ node scripts/parse_northno1_reply.js --paper paper_default --input papers/paper_
 - **深海**：余则成和翠萍角色，会在完成任务时说出经典台词
 
 ### 本地 JSON API
+服务只绑定 `127.0.0.1`。API 会校验本地 Host 和浏览器同源 Origin；有请求体时必须使用 `Content-Type: application/json`。本地 CLI 可以省略 Origin。这不是本地进程身份验证：能访问本机端口的程序仍可使用 API，请勿通过代理向不可信网络公开。
+
+离线校验：`npm test`（HTTP 安全边界，使用模拟动作）和 `npm run smoke:test`（合成工作区及适配层 dry-run）。
+
 常见 action：
 - `northno1.compose`
 - `northno1.send`
@@ -332,6 +343,13 @@ Minimal example:
 ```
 
 ### Main Commands
+Initialize a paper workspace first:
+```bash
+node scripts/init_paper.js --paper paper_default
+```
+
+Edit the generated `papers/paper_default/config/deepsea.json` with a workspace and API configuration you are authorized to use. Do not commit real configuration or credentials. The validator rejects the default placeholder URL.
+
 Validate a paper config:
 ```bash
 node scripts/validate_paper_config.js --paper paper_default
@@ -358,6 +376,10 @@ Start the local JSON API:
 ```
 
 ### Local JSON API
+The server binds only to `127.0.0.1`. API requests require a local Host and, for browser callers, a matching Origin; request bodies must use `Content-Type: application/json`. Local CLI callers may omit Origin. This is not local-process authentication: programs that can reach the local port can still use the API. Do not expose it to untrusted networks through a proxy.
+
+Offline checks: `npm test` (HTTP security boundary with stub actions) and `npm run smoke:test` (synthetic workspaces and adapter dry-runs).
+
 Common actions:
 - `northno1.compose`
 - `northno1.send`

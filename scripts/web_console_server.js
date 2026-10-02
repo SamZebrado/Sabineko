@@ -22,6 +22,7 @@ const {
   terminatePipeline
 } = require('./pipeline_state');
 const qvbingMode = require('./qvbing_mode');
+const { enforceLocalApiRequest, isJsonRequest } = require('./local_api_guard');
 
 const WEB_DIR = path.join(ROOT, 'web');
 const PORT = Number(process.env.PIPELINE_WEB_PORT || 8788);
@@ -52,6 +53,9 @@ function sendText(res, statusCode, text, contentType = 'text/plain; charset=utf-
 }
 
 function readBody(req) {
+  if (!isJsonRequest(req)) {
+    return Promise.reject(Object.assign(new Error('API request bodies must use application/json'), { statusCode: 415 }));
+  }
   return new Promise((resolve, reject) => {
     let raw = '';
     req.on('data', (chunk) => {
@@ -1762,13 +1766,14 @@ const server = http.createServer(async (req, res) => {
     const parsed = new URL(req.url, `http://127.0.0.1:${PORT}`);
 
     if (parsed.pathname.startsWith('/api/')) {
+      if (!enforceLocalApiRequest(req, res, PORT)) return;
       await handleApi(req, res, parsed.pathname, parsed.searchParams);
       return;
     }
 
     serveStatic(req, res, parsed.pathname);
   } catch (err) {
-    sendJson(res, 500, { error: err.message });
+    sendJson(res, err.statusCode === 415 ? 415 : 500, { error: err.message });
   }
 });
 

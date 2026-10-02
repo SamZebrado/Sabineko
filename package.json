@@ -17,9 +17,13 @@
     "smoke:test": "node scripts/smoke_test.js",
     "run:capture": "bash run_capture.sh",
     "web": "node scripts/web_console_server.js",
-    "run:web": "bash run_web.sh"
+    "run:web": "bash run_web.sh",
+    "test": "node --test tests/*.test.js"
   },
   "devDependencies": {
     "playwright": "^1.58.2"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
